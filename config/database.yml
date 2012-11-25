@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  database: idea_gen
+  host: localhost
+  username: jasdeep1
+  password:
+
+test:
+  adapter: postgresql
+  database: idea_gen
+  host: localhost
+  username: jasdeep1
+  password:
+
+  

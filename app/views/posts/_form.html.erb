@@ -1,0 +1,41 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :size=>84 %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= collection_select(:post, :user_id, User.all, :user_num, :number_name, {:prompt=>"Select your name"}, html_options={:class => 'author-select'}) %>
+    <div class="hide-field">
+      <%= f.label :user_id %><br />
+      <%= f.text_field :user_id, :class=>"user_id_set" %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+$('#post_user_id').change(function(){
+                    var selected = $('#post_user_id').find(':selected').val().split(' ');
+                    $('.user_id_set').val(selected[0])
+                  })
+
+</script>

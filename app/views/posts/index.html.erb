@@ -1,0 +1,43 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Votes</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td class='show-content show<%= post.id %>'><%= post.content %></td>
+    <td><%= post.votes %></td>
+    <td><%= post.user_id %></td>
+    <td><%= link_to 'Vote up', post_vote_path(:id=>post.id, :direction=>1) %></td> 
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><a href="#" data-pass="<%= post.id %>" id='post-button<%= post.id %>'>Press me</a></td>
+    <script type="text/javascript">
+      var $div_on = $('#post-button<%= post.id %>')
+
+      $div_on.click(function(){
+        if($('.show<%= post.id %>').is(":hidden")){
+          $('.show<%= post.id %>').show()
+        }
+        else{
+          $('.show<%= post.id %>').hide()
+        }
+      })
+    </script>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>
