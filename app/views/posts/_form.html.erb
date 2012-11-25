@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content %>
+    <%= f.text_area :content, :cols=>60, :rows=>4 %>
   </div>
   <div class="field">
     <%= collection_select(:post, :user_id, User.all, :user_num, :number_name, {:prompt=>"Select your name"}, html_options={:class => 'author-select'}) %>

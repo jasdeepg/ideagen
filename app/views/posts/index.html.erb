@@ -1,43 +1,56 @@
-<h1>Listing posts</h1>
+<div class='list-space'>
+  <div class='row-fluid'>
+  <h1 class='span8 pull-left'>Ideas</h1> 
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Votes</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <button class="btn btn-success new-post span3 pull-right"><%= link_to 'New Post', new_post_path %></button>
+  </div>
 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
-    <td class='show-content show<%= post.id %>'><%= post.content %></td>
-    <td><%= post.votes %></td>
-    <td><%= post.user_id %></td>
-    <td><%= link_to 'Vote up', post_vote_path(:id=>post.id, :direction=>1) %></td> 
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><a href="#" data-pass="<%= post.id %>" id='post-button<%= post.id %>'>Press me</a></td>
-    <script type="text/javascript">
-      var $div_on = $('#post-button<%= post.id %>')
+  <br>
+  <br>
 
-      $div_on.click(function(){
-        if($('.show<%= post.id %>').is(":hidden")){
-          $('.show<%= post.id %>').show()
-        }
-        else{
-          $('.show<%= post.id %>').hide()
-        }
-      })
-    </script>
-  </tr>
-<% end %>
-</table>
+  <% @posts.each do |post| %>
+    <div class='row-fluid'>
+      <div class='well'>
+        <div class='span12 idea-head'><%= post.title %></div> 
+        <br>
+        <br>
+        <br>
+        Posted by: <%= post.user.name %> on <%= post.created_at.month %>/<%= post.created_at.day %>
+        <br>
+        <br>
+        <div class='span12'>
+          <a href="#show<%= post.id %>" data-pass="<%= post.id %>" id='post-button<%= post.id %>'><b>Read more...</b></a>
+        </div>
+        <br>
+        <div class="span9 pull-left">
+          <%= link_to 'Edit post', edit_post_path(post), :style=>"font-size:8px;"%>
+        </div>
+        <div class="span2 pull-right">
+          <%= link_to "", post_vote_path(:id=>post.id, :direction=>1), :class=>"icon-arrow-up" %> <%= link_to "", post_vote_path(:id=>post.id, :direction=>0), :class=>"icon-arrow-down" %> (<%= post.votes %>)
+        </div>
+        <br>
+        <script type="text/javascript">
+          var $div_on = $('#post-button<%= post.id %>')
 
-<br />
+          $div_on.click(function(){
+            if($('.show<%= post.id %>').is(":hidden")){
+              $('.show<%= post.id %>').show(1000)
+            }
+            else{
+              $('.show<%= post.id %>').hide()
+            }
+          })
+        </script>
+      </div>
+    </div>
+    <div class='row-fluid show-content show<%= post.id %>'>
+      <div class='content-space'>
+        <h4><%= post.title %></h4>
+        <%= post.content %>
+        <div id="show<%= post.id %>"></div>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to 'New Post', new_post_path %>
+  <br />
+</div>

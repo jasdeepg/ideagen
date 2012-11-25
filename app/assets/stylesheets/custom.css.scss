@@ -1,7 +1,39 @@
+body {
+	padding-top:0px;
+	background-image:url('linedpaper.png')
+}
+
 .hide-field {
-	display: block;	
+	display: none;	
+}
+
+.list-space	{
+	margin: 100px 25% 50px 25%;
 }
 
 .show-content {
 	display:none;
+}
+
+.content-space	{
+	border:1px solid black;
+	margin-left:-100px;
+	margin-right:-100px;
+	padding-bottom:20px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.idea-head {
+	font-size:20px;
+}
+
+.new-post {
+	color:black;
+	text-shadow: none;
+	margin-top:3%;
+}
+
+.btn	{
+	color:black;
 }
